@@ -19,11 +19,15 @@ function displayNews() {
 
         var date = news.publishedAt.split("T");
 
-        var col = document.createElement("div");
-        col.className = "col p-2 card";
+        var placeholder = document.createElement("div");
+        placeholder.className = "col-9";
+
+        var content = document.createElement("div");
+        content.className = "col-3";
 
         var card = document.createElement("div");
-        card.className = "card";
+        card.className = "card mb-3";
+        
 
         var cardBody = document.createElement("div");
         cardBody.className = "card-body";
@@ -34,7 +38,10 @@ function displayNews() {
 
         card.appendChild(cardTitle);
         cardBody.appendChild(card);
-        newsdetails.appendChild(cardBody);
+        content.appendChild(cardBody);
+        newsdetails.appendChild(placeholder);
+        newsdetails.appendChild(content);
+        
         
     })
 }
