@@ -1,12 +1,13 @@
 
 var newsArr = [];
 
+
 async function fetchData() {
-    const response = await fetch('https://saurav.tech/NewsAPI/top-headlines/category/general/in.json');
+    const response = await fetch('https://github.win11react.com/api-cache/news.json');
     newsArr = [];
     const myJson = await response.json();
     newsArr = myJson.articles;
-    console.log(newsArr);   
+    console.log(newsArr[0]);   
     displayNews();
     return;
 }
@@ -15,7 +16,7 @@ function displayNews() {
 
     newsdetails.innerHTML = "";
 
-    newsArr.forEach(news => {
+    newsArr.slice(-5).forEach(news => {
 
         var date = news.publishedAt.split("T");
 
@@ -28,7 +29,6 @@ function displayNews() {
         var card = document.createElement("div");
         card.className = "card mb-3";
         
-
         var cardBody = document.createElement("div");
         cardBody.className = "card-body";
 
@@ -36,9 +36,25 @@ function displayNews() {
         cardTitle.className = "card-title";
         cardTitle.innerHTML = news.title;
 
-        card.appendChild(cardTitle);
-        cardBody.appendChild(card);
-        content.appendChild(cardBody);
+        var dateInfo = document.createElement("p");
+        dateInfo.className = "card-text text-muted";
+        dateInfo.innerHTML = date[1];
+
+        var link = document.createElement("a");
+        link.href = news.url;
+        link.className = "btn btn-sm btn-primary";
+        link.innerHTML = "Read full Article";
+
+        var cardText = document.createElement("p");
+        cardText.className = "card-text";
+        cardText.innerHTML = news.description;
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardText);
+        cardBody.appendChild(link);
+        cardBody.appendChild(dateInfo);
+        card.appendChild(cardBody);
+        content.appendChild(card);
         newsdetails.appendChild(placeholder);
         newsdetails.appendChild(content);
         
